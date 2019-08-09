@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[User]
+(
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[UserName] [nvarchar](256) NULL,
+	[NormalizedUserName] [nvarchar](256) NULL,
+	[Email] [nvarchar](256) NULL,
+	[NormalizedEmail] [nvarchar](256) NULL,
+	[EmailConfirmed] [bit] NOT NULL,
+	[PhoneNumber] [nvarchar](max) NULL,
+	[Deleted] [bit] NOT NULL,
+	[CreateDate] [datetime2](7) NOT NULL,
+	[ModifiedDate] DATETIME NULL,
+	[IsRegistered] [bit] NOT NULL,
+	[PhoneNumberConfirmed] [bit] NOT NULL,
+	[PasswordHash] [nvarchar](max) NULL,
+	[SecurityStamp] [nvarchar](max) NULL,
+	[ConcurrencyStamp] [nvarchar](max) NULL,
+	[TwoFactorEnabled] [bit] NOT NULL,
+	[LockoutEnd] [datetimeoffset](7) NULL,
+	[LockoutEnabled] [bit] NOT NULL,
+	[AccessFailedCount] [int] NOT NULL,
+
+	CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC),
+)

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
 namespace IAFProject.Authentication
 {
@@ -38,6 +33,25 @@ namespace IAFProject.Authentication
                     ValidateAudience = false
                 };
             });
+        }
+
+        public static void ConfigureServices(string connectionString, IServiceCollection services)
+        {
+            services.AddTransient<UserManager<User>>();
+            services.AddTransient<SignInManager<User>>();
+
+            services.AddDbContext<IAFDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-:@.";
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
+
+            }).AddEntityFrameworkStores<IAFDbContext>().AddDefaultTokenProviders();
         }
     }
 }

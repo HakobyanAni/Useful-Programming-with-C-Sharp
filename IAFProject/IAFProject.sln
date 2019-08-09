@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IAFProject.BLL", "IAFProjec
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IAFProject.DB", "IAFProject.DB\IAFProject.DB.sqlproj", "{3C784277-1076-430D-AE99-BF5EEEE999D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAFProject.WebApi", "IAFProject.WebApi\IAFProject.WebApi.csproj", "{B3CE0749-C805-474B-ABE3-D73BBE5BD9AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IAFProject.WebApi", "IAFProject.WebApi\IAFProject.WebApi.csproj", "{B3CE0749-C805-474B-ABE3-D73BBE5BD9AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAFProject.BLL.Models", "IAFProject.BLL.Models\IAFProject.BLL.Models.csproj", "{FFE491A9-AFA8-422E-9C4D-3B94E77E4F20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{B3CE0749-C805-474B-ABE3-D73BBE5BD9AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3CE0749-C805-474B-ABE3-D73BBE5BD9AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3CE0749-C805-474B-ABE3-D73BBE5BD9AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFE491A9-AFA8-422E-9C4D-3B94E77E4F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFE491A9-AFA8-422E-9C4D-3B94E77E4F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFE491A9-AFA8-422E-9C4D-3B94E77E4F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFE491A9-AFA8-422E-9C4D-3B94E77E4F20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
