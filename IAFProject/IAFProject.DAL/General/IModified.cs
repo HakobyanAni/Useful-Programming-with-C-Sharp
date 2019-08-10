@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IAFProject.DAL.Core
+namespace IAFProject.DAL.General
 {
     public interface IModified
     {
