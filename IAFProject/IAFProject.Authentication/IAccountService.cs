@@ -1,5 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 using IAFProject.BLL.Models.User;
+using Microsoft.AspNetCore.Identity;
 
 namespace IAFProject.Authentication
 {
