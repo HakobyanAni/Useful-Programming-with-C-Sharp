@@ -4,4 +4,4 @@
 
 
 * [Google Translator API](https://github.com/HakobyanAni/Useful-Programming/tree/master/GoogleTranslator)
-* [Asp.NET Core WebApi JWT Authentication with Identity & Ms SQL] (https://github.com/HakobyanAni/Useful-Programming/tree/master/IAFProject)
+* [Asp.NET Core WebApi JWT Authentication with Identity & Ms SQL](https://github.com/HakobyanAni/Useful-Programming/tree/master/IAFProject)
