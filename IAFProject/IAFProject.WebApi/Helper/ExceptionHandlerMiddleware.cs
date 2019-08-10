@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using IAFProject.BLL.Models.General;
@@ -33,7 +31,7 @@ namespace IAFProject.WebApi.Helper
         {
             string message = ex.Message;
 
-            ResponseWrapper<object> responseModel = new ResponseWrapper<object>(true, null, message);
+            ResponseModel<object> responseModel = new ResponseModel<object>(true, message);
 
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             context.Response.ContentType = "application/json";

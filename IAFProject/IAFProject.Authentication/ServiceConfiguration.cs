@@ -10,9 +10,11 @@ namespace IAFProject.Authentication
 {
     public static class ServiceConfiguration
     {
-        public static void Configure()
+        public static void Configure(string connectionString, IServiceCollection services)
         {
-     
+            services.AddDbContext<IAFProjectDBContext>(options => options.UseSqlServer(connectionString));
+            services.AddTransient<UserManager<User>>();
+            services.AddTransient<SignInManager<User>>();
         }
 
         public static void Authenticate(IServiceCollection services, string appSettingsSecret)
@@ -37,13 +39,8 @@ namespace IAFProject.Authentication
             });
         }
 
-        public static void ConfigureServices(string connectionString, IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<UserManager<User>>();
-            services.AddTransient<SignInManager<User>>();
-
-            services.AddDbContext<IAFProjectDBContext>(options => options.UseSqlServer(connectionString));
-
             services.AddIdentity<User, Role>(options =>
             {
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-:@.";

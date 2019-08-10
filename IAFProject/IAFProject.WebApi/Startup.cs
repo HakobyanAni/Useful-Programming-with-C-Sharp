@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using IAFProject.Authentication;
+using IAFProject.WebApi.Helper;
 
 namespace IAFProject.WebApi
 {
@@ -23,9 +24,9 @@ namespace IAFProject.WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+             ServiceConfiguration.Configure(Configuration.GetConnectionString("IAFProjectDatabase"), services);
 
             #region JWT token configuration
 
@@ -36,11 +37,12 @@ namespace IAFProject.WebApi
 
             #endregion
 
+            ServiceConfiguration.ConfigureServices(services);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(opt => opt.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver());
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -52,7 +54,9 @@ namespace IAFProject.WebApi
                 app.UseHsts();
             }
 
+            app.UseWelcomePage("/");
             app.UseHttpsRedirection();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             app.UseMvc();
         }
     }

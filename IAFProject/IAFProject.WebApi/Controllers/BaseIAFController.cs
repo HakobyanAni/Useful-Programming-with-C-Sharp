@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IAFProject.BLL.Models.General;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IAFProject.WebApi.Controllers
@@ -10,6 +11,6 @@ namespace IAFProject.WebApi.Controllers
     [Route("api/[controller]/[action]")]
     public abstract class BaseIAFController : ControllerBase
     {
-
+      
     }
 }
