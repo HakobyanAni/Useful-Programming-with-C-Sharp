@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace IAFProject.Authentication
 {
-    public class Account
+    public class Account : IAccountService
     {
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
