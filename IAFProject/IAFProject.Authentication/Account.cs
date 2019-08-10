@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IAFProject.BLL.Models.User;
 using Microsoft.AspNetCore.Identity;
 using IAFProject.BLL.Models.General;
+using IAFProject.DAL.Models;
 
 namespace IAFProject.Authentication
 {

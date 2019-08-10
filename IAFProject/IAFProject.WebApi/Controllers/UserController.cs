@@ -17,11 +17,11 @@ namespace IAFProject.WebApi.Controllers
             _account = account;
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> SignUp(UserModel userModel)
-        {
-            _account.SignUp(userModel);
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> SignUp(UserModel userModel)
+        //{
+        //    _account.SignUp(userModel);
 
 
 
@@ -29,14 +29,14 @@ namespace IAFProject.WebApi.Controllers
 
 
 
-            if (identityResult.Errors.Any())
-            {
-                return CreateDefaultResponse(identityResult.Errors.FirstOrDefault().Description);
-            }
+        //    if (identityResult.Errors.Any())
+        //    {
+        //        return CreateDefaultResponse(identityResult.Errors.FirstOrDefault().Description);
+        //    }
 
-            return CreateDefaultResponse(user);
-            return Ok();
+        //    return CreateDefaultResponse(user);
+        //    return Ok();
 
-        }
+        //}
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
+using IAFProject.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace IAFProject.Authentication
 {
@@ -40,7 +42,7 @@ namespace IAFProject.Authentication
             services.AddTransient<UserManager<User>>();
             services.AddTransient<SignInManager<User>>();
 
-            services.AddDbContext<IAFDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<IAFProjectDBContext>(options => options.UseSqlServer(connectionString));
 
             services.AddIdentity<User, Role>(options =>
             {
@@ -51,7 +53,7 @@ namespace IAFProject.Authentication
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 8;
 
-            }).AddEntityFrameworkStores<IAFDbContext>().AddDefaultTokenProviders();
+            }).AddEntityFrameworkStores<IAFProjectDBContext>().AddDefaultTokenProviders();
         }
     }
 }

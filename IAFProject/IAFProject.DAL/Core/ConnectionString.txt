@@ -1,0 +1,1 @@
+﻿scaffold-dbcontext "Data Source=(local);Initial Catalog=IAFProject.DB;Integrated Security=True;" Microsoft.EntityFrameworkCore.sqlserver -outputdir Models
