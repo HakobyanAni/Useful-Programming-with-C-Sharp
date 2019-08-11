@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IAFProject.DAL.General
 {
-    public interface IEntity
+    public interface IBaseEntity
     {
         int Id { get; set; }
         DateTime CreateDate { get; set; }

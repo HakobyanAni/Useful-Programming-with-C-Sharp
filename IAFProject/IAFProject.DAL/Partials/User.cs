@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IAFProject.DAL.Models
 {
-    public partial class User : IdentityUser<int>, IEntity, IModified
+    public partial class User : IdentityUser<int>, IBaseEntity, IModified
     {
     }
 }

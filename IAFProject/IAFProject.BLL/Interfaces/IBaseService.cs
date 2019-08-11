@@ -6,5 +6,6 @@ namespace IAFProject.BLL.Interfaces
 {
     public interface IBaseService
     {
+
     }
 }
