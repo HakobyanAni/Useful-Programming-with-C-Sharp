@@ -11,6 +11,7 @@
 	[Deleted] [bit] NOT NULL,
 	[CreateDate] [datetime2](7) NOT NULL,
 	[ModifiedDate] DATETIME NULL,
+	[LastEntryDate] DATETIME NULL,
 	[IsRegistered] [bit] NOT NULL,
 	[PhoneNumberConfirmed] [bit] NOT NULL,
 	[PasswordHash] [nvarchar](max) NULL,

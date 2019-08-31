@@ -8,22 +8,24 @@ using IAFProject.DAL.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Net.Mail;
+using IAFProject.BLL.Models.General;
 
 namespace IAFProject.Authentication
 {
-    public class Account : IAccountService
+    public class AccountService : IAccountService
     {
         #region Fields
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
+        private EmailSenderService _senderService;
         #endregion
 
         #region Constructors
-        public Account(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, EmailSenderService senderService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _senderService = senderService;
         }
         #endregion
 
@@ -62,7 +64,10 @@ namespace IAFProject.Authentication
             {
                 return identityResult.Errors.FirstOrDefault().Description;
             }
-            string sendingMessage = await SendEmail(user.UserName);
+
+            string messageSubject = Constants.messageSubjectForUserSignUp;
+            string messageBody = Constants.messageBodyForUserSignUp + $"{user.UserName}";
+            string sendingMessage = await _senderService.SendEmail(user.UserName, messageSubject, messageBody);
             return user;
         }
 
@@ -84,6 +89,8 @@ namespace IAFProject.Authentication
             {
                 throw new Exception("Email isn't confirmed.");
             }
+
+            user.LastEntryDate = DateTime.Now;
 
             SecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(appSecret);
@@ -120,26 +127,6 @@ namespace IAFProject.Authentication
                 return result.Errors.FirstOrDefault().Description;
             }
             return user;
-        }
-
-        public async Task<string> SendEmail(string userName)
-        {
-            User user = await _userManager.FindByNameAsync(userName);
-            MailMessage mailMessage = new MailMessage();
-            SmtpClient server = new SmtpClient();
-
-            mailMessage.From = new MailAddress("AT-Tech.10@gmail.com");
-            mailMessage.To.Add(user.Email);
-            mailMessage.Subject = "Test Mail";
-            mailMessage.Body = $@"http://***************/api/user/emailconfirm?userName=" + $"{userName}";
-            mailMessage.IsBodyHtml = true;
-
-            server.Credentials = new System.Net.NetworkCredential("AT-Tech.10@gmail.com", "hi-&High08Tech");
-            server.EnableSsl = true;
-            server.Host = "smtp.gmail.com";
-            server.Port = 587;
-            server.Send(mailMessage);
-            return "Email was sent";
         }
 
         public async Task<string> EmailConfirmBL(string userName)

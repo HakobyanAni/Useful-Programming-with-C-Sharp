@@ -9,6 +9,7 @@ namespace IAFProject.DAL.Models
         public bool Deleted { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
+        public DateTime? LastEntryDate { get; set; }
         public bool IsRegistered { get; set; }
     }
 }

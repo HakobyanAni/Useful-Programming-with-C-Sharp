@@ -11,12 +11,12 @@ namespace IAFProject.WebApi.Controllers
     public class UserController : BaseIAFController
     {
         #region Fields
-        private Account _account;
+        private AccountService _account;
         private AppSettings _appSettings;
         #endregion
 
         #region Constructors
-        public UserController(Account account, IOptions<AppSettings> appSettings)
+        public UserController(AccountService account, IOptions<AppSettings> appSettings)
         {
             _account = account;
         }

@@ -1,4 +1,5 @@
-﻿using IAFProjectUserDeleteByLastEntryDateJob.Jobs;
+﻿using IAFProject.BLL.General;
+using IAFProjectUserDeleteByLastEntryDateJob.Jobs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ namespace IAFProjectUserDeleteByLastEntryDateJob
 
         public void ConfigureServices(IServiceCollection services)
         {
+            Configurations.ConfigureUserDeleteProcessingServices(Configuration.GetConnectionString("IAFProjectDatabase"), services);
             ConfigureLocalServices(services);
 
             ServiceProvider container = services.BuildServiceProvider();
@@ -53,6 +55,7 @@ namespace IAFProjectUserDeleteByLastEntryDateJob
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseWelcomePage("/");
         }
 
         void ConfigureLocalServices(IServiceCollection services)
