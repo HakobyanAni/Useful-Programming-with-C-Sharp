@@ -35,12 +35,11 @@ namespace IAFProject.Authentication
             User user = await _userManager.FindByEmailAsync(userModel.Email);
             if (user != null && !user.Deleted)
             {
+                if (!user.EmailConfirmed)
+                {
+                    throw new Exception("Please, confirm your email.");
+                }
                 throw new Exception("User with current email already exists");
-            }
-
-            if (!user.EmailConfirmed)
-            {
-                throw new Exception("Please, confirm your email.");
             }
 
             if (!string.Equals(userModel.Password, userModel.ConfirmPassword))

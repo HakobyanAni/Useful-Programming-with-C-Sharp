@@ -19,7 +19,7 @@ namespace IAFProject.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-             ServiceConfiguration.Configure(Configuration.GetConnectionString("IAFProjectDatabase"), services);
+            ServiceConfiguration.Configure(Configuration.GetConnectionString("IAFProjectDatabase"), services);
 
             #region JWT token configuration
 

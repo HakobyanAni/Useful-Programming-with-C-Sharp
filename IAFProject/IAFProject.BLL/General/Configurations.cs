@@ -14,6 +14,7 @@ namespace IAFProject.BLL.General
         {
             services.AddDbContext<IAFProjectDBContext>(options => options.UseSqlServer(connectionString));
             services.AddTransient<UserManager<User>>();
+            services.AddTransient<RoleManager<Role>>();
             services.AddTransient<IUserDeleteProcessor, UserDeleteProcessor>();
             services.AddTransient<IEmailSenderService, EmailSenderService>();
         }

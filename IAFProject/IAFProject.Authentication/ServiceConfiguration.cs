@@ -15,6 +15,8 @@ namespace IAFProject.Authentication
             services.AddDbContext<IAFProjectDBContext>(options => options.UseSqlServer(connectionString));
             services.AddTransient<UserManager<User>>();
             services.AddTransient<SignInManager<User>>();
+            services.AddTransient<AccountService>();
+            services.AddTransient<EmailSenderService>();
         }
 
         public static void Authenticate(IServiceCollection services, string appSettingsSecret)

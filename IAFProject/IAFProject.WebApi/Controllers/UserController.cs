@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using IAFProject.Authentication;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using IAFProject.DAL.Models;
 
 namespace IAFProject.WebApi.Controllers
 {
@@ -19,12 +21,12 @@ namespace IAFProject.WebApi.Controllers
         public UserController(AccountService account, IOptions<AppSettings> appSettings)
         {
             _account = account;
+            _appSettings = appSettings.Value;
         }
         #endregion
 
         #region Actions
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> SignUp(UserModel userModel)
         {
             var result = await _account.SignUp(userModel);
@@ -32,7 +34,6 @@ namespace IAFProject.WebApi.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> EmailConfirm(string userName)
         {
             string result = await _account.EmailConfirmBL(userName);
