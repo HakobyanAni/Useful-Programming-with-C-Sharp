@@ -18,7 +18,6 @@ namespace GeoLibrary
             bool isInPolygon = polygon.Contains(Coord);
             Console.WriteLine(isInPolygon);
 
-
             Console.ReadKey();
         }
     }
