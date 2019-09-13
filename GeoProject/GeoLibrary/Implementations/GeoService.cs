@@ -1,14 +1,12 @@
-﻿using GeoLibrary.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using GeoLibrary.Enums;
+using GeoLibrary.Helpers;
+using GeoLibrary.Interfaces;
 
-namespace GeoLibrary
+namespace GeoLibrary.Implementations
 {
-    public class GeoLocationService : IGeoLocationService
-    {  
+    public class GeoService : IGeoService
+    {
         /// <summary>
         /// This method calculates the distance in miles or kilometers of any two
         /// latitude/longitude points by haversine formula. The haversine formula 
@@ -22,16 +20,25 @@ namespace GeoLibrary
         /// <param name="pos2">Location 2</param>
         /// <param name="unit">Miles or Kilometers</param>
         /// <returns>Distance in the requested unit</returns>
-        public static double CalculateDistance(LatLng pos1, LatLng pos2, DistanceUnitEnum unit)
+        public double CalculateDistance(double Latitude1, double Longitude1, double Latitude2, double Longitude2, DistanceUnitEnum unit)
         {
             double R = (unit == DistanceUnitEnum.Miles) ? 3960 : 6371;
-            double lat = (pos2.Latitude - pos1.Latitude).ToRadians();
-            double lng = (pos2.Longitude - pos1.Longitude).ToRadians();
+            double lat = Commons.ToRadians(Latitude2 - Latitude1);
+            double lng = Commons.ToRadians(Longitude2 - Longitude1);
             double h1 = Math.Sin(lat / 2) * Math.Sin(lat / 2) +
-                          Math.Cos(pos1.Latitude.ToRadians()) * Math.Cos(pos2.Latitude.ToRadians()) *
+                          Math.Cos(Commons.ToRadians(Latitude1)) * Math.Cos(Commons.ToRadians(Latitude2)) *
                           Math.Sin(lng / 2) * Math.Sin(lng / 2);
             double h2 = 2 * Math.Asin(Math.Min(1, Math.Sqrt(h1)));
             return R * h2;
+        }
+
+        public bool IsInPolygon(double latitude, double longitude, IGeometry polygon)
+        {
+            Coordinate coord = new Coordinate(longitude, latitude);
+            Point point = new Point(coord);
+            bool isInPolygon = polygon.Polygon != null ? polygon.Polygon.Contains(point) : false;
+
+            return isInPolygon;
         }
     }
 }

@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\DistanceUnitEnum.cs" />
-    <Compile Include="GeoLocationService.cs" />
     <Compile Include="Helpers\Commons.cs" />
-    <Compile Include="IGeoLocationService.cs" />
+    <Compile Include="Implementations\GeoService.cs" />
+    <Compile Include="Interfaces\IGeoService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
