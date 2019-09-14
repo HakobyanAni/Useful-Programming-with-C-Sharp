@@ -1,12 +1,21 @@
 ﻿using System;
+using GeoAPI.Geometries;
 using GeoLibrary.Enums;
 using GeoLibrary.Helpers;
 using GeoLibrary.Interfaces;
+using NetTopologySuite.Geometries;
 
 namespace GeoLibrary.Implementations
 {
     public class GeoService : IGeoService
     {
+        #region Constructors
+        public GeoService()
+        {
+        }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// This method calculates the distance in miles or kilometers of any two
         /// latitude/longitude points by haversine formula. The haversine formula 
@@ -34,11 +43,15 @@ namespace GeoLibrary.Implementations
 
         public bool IsInPolygon(double latitude, double longitude, IGeometry polygon)
         {
-            Coordinate coord = new Coordinate(longitude, latitude);
-            Point point = new Point(coord);
-            bool isInPolygon = polygon.Polygon != null ? polygon.Polygon.Contains(point) : false;
+            //NetTopologySuite.Geometries.Coordinate coord = new NetTopologySuite.Geometries.Coordinate(longitude, latitude);
+            //IPoint point = new Point(coord) as IPoint;
 
+            //or 
+            IPoint point = new Point(latitude, longitude) as IPoint;
+
+            bool isInPolygon = polygon != null ? polygon.Contains(point) : false;
             return isInPolygon;
         }
+        #endregion
     }
 }

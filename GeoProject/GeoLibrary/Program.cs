@@ -1,22 +1,14 @@
 ﻿using System;
-using GeoAPI.Geometries;
 
 namespace GeoLibrary
 {
     class Program
     {
-        public static IGeometry polygon { get; set; }
-        public static IGeometry Coord { get; set; }
-        public static double Lat { get; set; }
-        public static double Lng { get; set; }
-
         static void Main(string[] args)
         {
-            Lat = 34.1468658447266;
-            Lng = -118.065460205078;
-
-            bool isInPolygon = polygon.Contains(Coord);
-            Console.WriteLine(isInPolygon);
+            // You can use this class library to calculate the distance in miles or kilometers of any two
+            // latitude/longitude points on the Earth by Harvesine formula, and also to know if the given
+            // point is within the given polygon.
 
             Console.ReadKey();
         }
