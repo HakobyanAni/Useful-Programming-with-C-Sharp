@@ -11,6 +11,8 @@ namespace GeoLibrary
             // latitude/longitude points on the Earth by Harvesine formula, and also to know if the given
             // point is within the given polygon.
 
+            // You can delete this Program.cs file from library and easily integrate the library to your project. 
+
             Console.ReadKey();
         }
     }
