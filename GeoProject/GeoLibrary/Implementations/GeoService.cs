@@ -43,11 +43,11 @@ namespace GeoLibrary.Implementations
 
         public bool IsInPolygon(double latitude, double longitude, IGeometry polygon)
         {
-            //NetTopologySuite.Geometries.Coordinate coord = new NetTopologySuite.Geometries.Coordinate(longitude, latitude);
+            //Coordinate coord = new Coordinate(longitude, latitude);
             //IPoint point = new Point(coord) as IPoint;
 
             //or 
-            IPoint point = new Point(latitude, longitude) as IPoint;
+            Point point = new Point(latitude, longitude);
 
             bool isInPolygon = polygon != null ? polygon.Contains(point) : false;
             return isInPolygon;
