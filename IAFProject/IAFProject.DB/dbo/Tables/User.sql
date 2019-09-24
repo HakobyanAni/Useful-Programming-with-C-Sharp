@@ -9,6 +9,7 @@
 	[EmailConfirmed] [bit] NOT NULL,
 	[PhoneNumber] [nvarchar](max) NULL,
 	[Deleted] [bit] NOT NULL,
+	[ConfirmationCode] NVARCHAR (32) NULL,
 	[CreateDate] [datetime2](7) NOT NULL,
 	[ModifiedDate] DATETIME NULL,
 	[LastEntryDate] DATETIME NULL,

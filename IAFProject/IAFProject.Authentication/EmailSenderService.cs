@@ -19,15 +19,17 @@ namespace IAFProject.Authentication
         #endregion
 
         #region Methods
-        public async Task<string> SendEmail(string userName, string messageSubject, string messageBody)
+        public async Task<string> SendEmail(string email, string messageSubject, string messageBody)
         {
-            User user = await _userManager.FindByNameAsync(userName);
             MailMessage mailMessage = new MailMessage();
             SmtpClient server = new SmtpClient();
 
             mailMessage.From = new MailAddress("AT-Tech.10@gmail.com");
-            mailMessage.To.Add(user.Email);
+            mailMessage.To.Add(email);
             mailMessage.Subject = messageSubject;
+
+            // send confirmatoin code to user email
+            string confirmationCode = null;
             mailMessage.Body = messageBody;
             mailMessage.IsBodyHtml = true;
 
@@ -36,6 +38,11 @@ namespace IAFProject.Authentication
             server.Host = "smtp.gmail.com";
             server.Port = 587;
             server.Send(mailMessage);
+
+            User user = await _userManager.FindByEmailAsync(email);
+            user.IsRegistered = true;
+            user.ConfirmationCode = confirmationCode;
+
             return "Email was sent";
         }
         #endregion

@@ -7,6 +7,7 @@ namespace IAFProject.DAL.Models
     {
         public string Name { get; set; }
         public bool Deleted { get; set; }
+        public string ConfirmationCode { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public DateTime? LastEntryDate { get; set; }

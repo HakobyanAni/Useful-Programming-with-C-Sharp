@@ -33,13 +33,19 @@ namespace IAFProject.Authentication
         public async Task<object> SignUp(UserModel userModel)
         {
             User user = await _userManager.FindByEmailAsync(userModel.Email);
-            if (user != null && !user.Deleted)
+            if (user != null)
             {
-                if (!user.EmailConfirmed)
+                if (user.IsRegistered && !user.Deleted)
                 {
-                    throw new Exception("Please, confirm your email.");
+                    if (!user.EmailConfirmed)
+                    {
+                        throw new Exception("Please, confirm your email.");
+                    }
+                    else
+                    {
+                        throw new Exception("User with current email already exists");
+                    }
                 }
-                throw new Exception("User with current email already exists");
             }
 
             if (!string.Equals(userModel.Password, userModel.ConfirmPassword))
@@ -72,21 +78,26 @@ namespace IAFProject.Authentication
 
         public async Task<string> Login(UserLoginModel loginModel, string appSecret)
         {
-            User user = await _userManager.FindByNameAsync(loginModel.Username);
-            if (user == null || user.Deleted)
+            if (loginModel.Username == null)
             {
-                throw new Exception("User not found!");
+                throw new Exception("Sorry, you cannot log in.");
+            }
+
+            User user = await _userManager.FindByNameAsync(loginModel.Username);
+            if (user == null || user.Deleted || !user.IsRegistered)
+            {
+                throw new Exception("User doesn't exist.");
+            }
+
+            if (!user.EmailConfirmed)
+            {
+                throw new Exception("Email isn't confirmed.");
             }
 
             var passwordCheck = await _signInManager.CheckPasswordSignInAsync(user, loginModel.Password, true);
             if (!passwordCheck.Succeeded)
             {
                 throw new Exception("Wrong password!");
-            }
-
-            if (!user.EmailConfirmed)
-            {
-                throw new Exception("Email isn't confirmed.");
             }
 
             user.LastEntryDate = DateTime.Now;
@@ -128,14 +139,22 @@ namespace IAFProject.Authentication
             return user;
         }
 
-        public async Task<string> EmailConfirmBL(string userName)
+        public async Task<string> EmailConfirmBL(string userName, string confirmationCode)
         {
             User user = await _userManager.FindByNameAsync(userName);
             if (user == null || user.Deleted || !user.IsRegistered)
             {
                 throw new Exception("Cannot find user.");
             }
-            user.EmailConfirmed = true;
+
+            if (confirmationCode == user.ConfirmationCode)
+            {
+                user.EmailConfirmed = true;
+            }
+            else
+            {
+                throw new Exception("Confirmation Code isn't correct.");
+            }
 
             IdentityResult result = await _userManager.UpdateAsync(user);
             if (result.Errors.Any())
@@ -143,6 +162,23 @@ namespace IAFProject.Authentication
                 return result.Errors.FirstOrDefault().Description;
             }
             return "Email successfully confirmed. Now you can log in to your account.";
+        }
+
+        public async Task<UserSettingsModel> GetSettings(string userName)
+        {
+            User user = await _userManager.FindByNameAsync(userName);
+            if (user == null || user.Deleted || !user.EmailConfirmed)
+            {
+                throw new Exception("User doesn't exist.");
+            }
+            UserSettingsModel userSettings = new UserSettingsModel
+            {
+                Name = user.Name,
+                UserName = user.UserName,
+                Email = user.Email,
+                Phone = user.PhoneNumber
+            };
+            return userSettings;
         }
 
         public async Task<string> ChangePasswordBL(ChangePasswordModel changePasswordModel)

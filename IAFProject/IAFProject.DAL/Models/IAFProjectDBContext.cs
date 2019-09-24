@@ -28,7 +28,7 @@ namespace IAFProject.DAL.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-FJOGGMJ\\MSSQLSERVER02;Initial Catalog=IAFProject.DB; Integrated Security=True;");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-GK32AFP;Initial Catalog=IAFProject.DB; Integrated Security=True;");
             }
         }
 
@@ -45,6 +45,8 @@ namespace IAFProject.DAL.Models
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.Property(e => e.ConfirmationCode).HasMaxLength(32);
+
                 entity.Property(e => e.Email).HasMaxLength(256);
 
                 entity.Property(e => e.LastEntryDate).HasColumnType("datetime");
