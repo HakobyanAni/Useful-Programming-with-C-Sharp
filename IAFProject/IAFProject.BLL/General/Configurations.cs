@@ -1,4 +1,6 @@
 ﻿using IAFProject.Authentication;
+using IAFProject.Authentication.Implementation;
+using IAFProject.Authentication.Interfaces;
 using IAFProject.BLL.Interfaces;
 using IAFProject.BLL.UserDeleteProcessing;
 using IAFProject.DAL.Models;
@@ -17,6 +19,7 @@ namespace IAFProject.BLL.General
             services.AddTransient<RoleManager<Role>>();
             services.AddTransient<IUserDeleteProcessor, UserDeleteProcessor>();
             services.AddTransient<IEmailSenderService, EmailSenderService>();
+            services.AddTransient<IAccountService, AccountService>();
         }
     }
 }

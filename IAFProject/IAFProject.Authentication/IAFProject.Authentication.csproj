@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IAFProject.BLL.Models\IAFProject.BLL.Models.csproj" />
     <ProjectReference Include="..\IAFProject.DAL\IAFProject.DAL.csproj" />
+    <ProjectReference Include="..\IAFProject.General\IAFProject.General.csproj" />
   </ItemGroup>
 
 </Project>

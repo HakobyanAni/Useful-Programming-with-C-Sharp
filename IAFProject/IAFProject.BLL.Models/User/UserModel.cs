@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IAFProject.BLL.Models.General;
+﻿using IAFProject.BLL.Models.General;
 
 namespace IAFProject.BLL.Models.User
 {
@@ -13,6 +10,7 @@ namespace IAFProject.BLL.Models.User
         private string _password;
         private string _confirmPassword;
         private string _phoneNumber;
+        private string _confirmationCode;
 
         public int? Id
         {
@@ -101,13 +99,17 @@ namespace IAFProject.BLL.Models.User
             }
         }
 
-        public bool IsEmpty()
+        public string ConfirmationCode
         {
-            return string.IsNullOrWhiteSpace(Name)
-                && string.IsNullOrWhiteSpace(Email)
-                && string.IsNullOrWhiteSpace(Password)
-                && string.IsNullOrWhiteSpace(ConfirmPassword)
-                && string.IsNullOrWhiteSpace(PhoneNumber);
+            get { return _confirmationCode; }
+            set
+            {
+                if (_confirmationCode != value)
+                {
+                    _confirmationCode = value;
+                    Notify();
+                }
+            }
         }
     }
 }

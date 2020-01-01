@@ -5,6 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using IAFProject.DAL.Models;
 using Microsoft.EntityFrameworkCore;
+using IAFProject.Authentication.Implementation;
+using IAFProject.Authentication.Interfaces;
 
 namespace IAFProject.Authentication
 {
@@ -45,7 +47,7 @@ namespace IAFProject.Authentication
         {
             services.AddIdentity<User, Role>(options =>
             {
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-:@.";
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-:@._";
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = false;

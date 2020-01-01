@@ -2,11 +2,9 @@
 using IAFProject.BLL.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using IAFProject.Authentication;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using IAFProject.DAL.Models;
+using IAFProject.Authentication.Implementation;
 
 namespace IAFProject.WebApi.Controllers
 {
@@ -26,45 +24,63 @@ namespace IAFProject.WebApi.Controllers
         #endregion
 
         #region Actions
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> SignUp(UserModel userModel)
         {
-            var result = await _account.SignUp(userModel);
+            string result = await _account.SignUp(userModel);
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EmailConfirm(string userName)
+        [HttpGet, AllowAnonymous]
+        public async Task<IActionResult> EmailConfirm(UserModel user)
         {
-            string result = await _account.EmailConfirmBL(userName);
+            string result = await _account.CheckConfirmationCodeAndRegisterUser(user);
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginModel loginModel)
         {
             string result = await _account.Login(loginModel, _appSettings.Secret);
             return Ok(result);
         }
 
-        [HttpPut]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> Update(UserUpdateModel userModel)
+        [HttpGet, AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(string email)
         {
-            var result = await _account.Update(userModel);
+            string result = await _account.ForgotPassword(email);
             return Ok(result);
         }
 
-        [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost, Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel resetPasswordModel)
+        {
+            string result = await _account.ResetPassword(resetPasswordModel);
+            return Ok(result);
+        }
+
+        [HttpPost, Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> ChangeEmail(ChangeEmailModel changeEmailModel)
+        {
+            string result = await _account.ChangeEmail(changeEmailModel);
+            return Ok(result);
+        }
+
+        [HttpPost, Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
         {
-            string result = await _account.ChangePasswordBL(changePasswordModel);
+            string result = await _account.ChangePassword(changePasswordModel);
             return Ok(result);
         }
 
-        [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet, Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> LogOut()
+        {
+            string result = await _account.LogOut();
+            return Ok(result);
+        }
+
+        [HttpPost, Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteUser(string userName)
         {
             string result = await _account.Delete(userName);

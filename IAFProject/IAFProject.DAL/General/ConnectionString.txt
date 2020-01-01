@@ -1,1 +1,1 @@
-﻿scaffold-dbcontext "Data Source=DESKTOP-GK32AFP;Initial Catalog=IAFProject.DB; Integrated Security=True;" Microsoft.EntityFrameworkCore.sqlserver -outputdir Models -force
+﻿Scaffold-DbContext "Data Source=DESKTOP-GK32AFP;Initial Catalog=IAFProject.DB; Integrated Security=True;" Microsoft.EntityFrameworkCore.sqlserver -outputdir Models -force

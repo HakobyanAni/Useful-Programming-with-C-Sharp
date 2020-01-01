@@ -5,6 +5,7 @@ using IAFProject.BLL.Interfaces;
 using IAFProject.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using IAFProject.BLL.Models.General;
+using IAFProject.Authentication.Implementation;
 
 namespace IAFProject.BLL.UserDeleteProcessing
 {

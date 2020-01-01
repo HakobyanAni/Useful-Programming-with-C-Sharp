@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using IAFProject.BLL.Models.General;
 
 namespace IAFProject.BLL.Models.User
 {
-    public class UserSettingsModel
+    public class UserSettingsModel : ModelBase
     {
         public string Name { get; set; }
         public string UserName { get; set; }

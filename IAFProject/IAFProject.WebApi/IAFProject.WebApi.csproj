@@ -23,4 +23,8 @@
     <ProjectReference Include="..\IAFProject.BLL\IAFProject.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
