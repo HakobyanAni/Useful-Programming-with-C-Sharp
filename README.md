@@ -6,4 +6,4 @@
 * [Google Translator API](https://github.com/HakobyanAni/Useful-Programming/tree/master/GoogleTranslator)
 * [Asp.NET Core WebApi JWT Authentication with Identity & Ms SQL](https://github.com/HakobyanAni/Useful-Programming/tree/master/IAFProject)
 * [Calculator with Xamarin Forms (IOS, Android)](https://github.com/HakobyanAni/Mobile-Development/tree/master/MobileProject)
-* [Job example with Quartz](https://github.com/HakobyanAni/Useful-Programming/tree/master/IAFProject)
+* [Crone Job example with Quartz](https://github.com/HakobyanAni/Useful-Programming/tree/master/IAFProject)
